@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Markdown Editor</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Markdown Editor</h1>
+      <div class="editor-preview-container">
+        <div class="editor">
+          <div class="toolbar">
+            <button id="bold" onclick="addMarkdownSyntax('bold')">
+              <i class="fas fa-bold"></i>
+            </button>
+            <button id="italic" onclick="addMarkdownSyntax('italic')">
+              <i class="fas fa-italic"></i>
+            </button>
+            <div class="dropdown">
+              <button id="heading" class="dropbtn">
+                <i class="fas fa-heading"></i>
+              </button>
+              <div class="dropdown-content">
+                <a href="#" onclick="addMarkdownSyntax('heading1')"
+                  >Heading 1</a
+                >
+                <a href="#" onclick="addMarkdownSyntax('heading2')"
+                  >Heading 2</a
+                >
+                <a href="#" onclick="addMarkdownSyntax('heading3')"
+                  >Heading 3</a
+                >
+                <a href="#" onclick="addMarkdownSyntax('heading4')"
+                  >Heading 4</a
+                >
+                <a href="#" onclick="addMarkdownSyntax('heading5')"
+                  >Heading 5</a
+                >
+                <a href="#" onclick="addMarkdownSyntax('heading6')"
+                  >Heading 6</a
+                >
+              </div>
+            </div>
+            <button id="link" onclick="addMarkdownSyntax('link')">
+              <i class="fas fa-link"></i>
+            </button>
+            <button id="quote" onclick="addMarkdownSyntax('quote')">
+              <i class="fas fa-quote-right"></i>
+            </button>
+            <div class="dropdown">
+              <button id="code" class="dropbtn">
+                <i class="fas fa-code"></i>
+              </button>
+              <div class="dropdown-content">
+                <a href="#" onclick="addCodeBlock('javascript')"
+                  ><i class="fab fa-js-square"></i> JavaScript</a
+                >
+                <a href="#" onclick="addCodeBlock('cpp')"
+                  ><i class="fas fa-code"></i> C++</a
+                >
+                <a href="#" onclick="addCodeBlock('python')"
+                  ><i class="fab fa-python"></i> Python</a
+                >
+                <a href="#" onclick="addCodeBlock('java')"
+                  ><i class="fab fa-java"></i> Java</a
+                >
+                <a href="#" onclick="addCodeBlock('typescript')"
+                  ><i class="fab fa-js"></i> TypeScript</a
+                >
+                <a href="#" onclick="addCodeBlock('csharp')"
+                  ><i class="fas fa-code"></i> C#</a
+                >
+                <a href="#" onclick="addCodeBlock('go')"
+                  ><i class="fas fa-code"></i> Go</a
+                >
+                <a href="#" onclick="addCodeBlock('php')"
+                  ><i class="fab fa-php"></i> PHP</a
+                >
+                <a href="#" onclick="addCodeBlock('ruby')"
+                  ><i class="fas fa-gem"></i> Ruby</a
+                >
+                <a href="#" onclick="addCodeBlock('swift')"
+                  ><i class="fab fa-swift"></i> Swift</a
+                >
+                <a href="#" onclick="addCodeBlock('kotlin')"
+                  ><i class="fas fa-code"></i> Kotlin</a
+                >
+                <a href="#" onclick="addCodeBlock('rust')"
+                  ><i class="fas fa-code"></i> Rust</a
+                >
+                <a href="#" onclick="addCodeBlock('scala')"
+                  ><i class="fas fa-code"></i> Scala</a
+                >
+                <a href="#" onclick="addCodeBlock('c')"
+                  ><i class="fas fa-code"></i> C</a
+                >
+                <a href="#" onclick="addCodeBlock('html')"
+                  ><i class="fab fa-html5"></i> HTML</a
+                >
+                <a href="#" onclick="addCodeBlock('css')"
+                  ><i class="fab fa-css3-alt"></i> CSS</a
+                >
+                <a href="#" onclick="addCodeBlock('bash')"
+                  ><i class="fas fa-terminal"></i> Bash</a
+                >
+                <a href="#" onclick="addCodeBlock('sql')"
+                  ><i class="fas fa-database"></i> SQL</a
+                >
+                <a href="#" onclick="addCodeBlock('markdown')"
+                  ><i class="fas fa-code"></i> Markdown</a
+                >
+                <a href="#" onclick="addCodeBlock('json')"
+                  ><i class="fas fa-code"></i> JSON</a
+                >
+                <a href="#" onclick="addCodeBlock('xml')"
+                  ><i class="fas fa-code"></i> XML</a
+                >
+                <a href="#" onclick="addCodeBlock('yaml')"
+                  ><i class="fas fa-code"></i> YAML</a
+                >
+                <a href="#" onclick="addCodeBlock('ini')"
+                  ><i class="fas fa-code"></i> INI</a
+                >
+                <!-- Add more languages as needed -->
+              </div>
+            </div>
+            <button id="list" onclick="addMarkdownSyntax('list')">
+              <i class="fas fa-list-ul"></i>
+            </button>
+            <button
+              id="numbered-list"
+              onclick="addMarkdownSyntax('numbered-list')"
+            >
+              <i class="fas fa-list-ol"></i>
+            </button>
+          </div>
+          <textarea
+            id="markdown-input"
+            placeholder="Enter Markdown content here..."
+          ></textarea>
+        </div>
+        <div class="preview-container">
+          <button onclick="updatePreview()">Preview</button>
+          <div id="preview"></div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/turndown/dist/turndown.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/turndown-plugin-gfm/dist/turndown-plugin-gfm.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
