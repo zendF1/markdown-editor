@@ -219,6 +219,10 @@ function handleKeyDown(event) {
       event.preventDefault();
       textarea.setRangeText("\n", start, end, "end");
       updatePreview();
+    } else {
+      event.preventDefault();
+      textarea.setRangeText("  \n", start, end, "end");
+      updatePreview();
     }
   } else if (event.key === "Tab") {
     event.preventDefault();
